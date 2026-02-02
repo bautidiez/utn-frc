@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universidad Tecnológica Nacional - Facultad Regional Córdoba</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <style>
+        :root {
+            --primary-blue: #00529b;
+            /* Azul UTN aproximado */
+            --light-blue: #e8f0f8;
+            --border-color: #ddd;
+            --text-color: #333;
+            --link-color: #0056b3;
+            --header-bg: #fff;
+        }
+
+        body {
+            font-family: Verdana, Geneva, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: var(--text-color);
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--link-color);
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: #f5f5f5;
+            padding: 5px 20px;
+            font-size: 11px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+        }
+
+        /* Header */
+        header {
+            background: rgb(0, 78, 162);
+            background: linear-gradient(90deg, rgba(0, 78, 162, 1) 0%, rgba(57, 126, 204, 1) 100%);
+            height: 120px;
+            position: relative;
+        }
+
+        .header-content {
+            width: 980px;
+            margin: 0 auto;
+            position: relative;
+            height: 100%;
+        }
+
+        .logo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            border-bottom: 1px solid #ccc;
+            border-top: 1px solid #ccc;
+        }
+
+        .nav-container {
+            width: 980px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item {
+            padding: 8px 15px;
+            color: #00529b;
+            font-weight: bold;
+            font-size: 12px;
+            border-right: 1px solid #eee;
+        }
+
+        .nav-item:hover {
+            background-color: #f0f0f0;
+            text-decoration: none;
+        }
+
+        /* Main Container */
+        .main-container {
+            width: 980px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr 280px;
+            /* Left Sidebar, Content, Right Sidebar(Larger) */
+            gap: 10px;
+            padding-top: 10px;
+        }
+
+        /* Sidebars */
+        .sidebar-box {
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #f9f9f9;
+        }
+
+        .sidebar-header {
+            background-color: #e0e0e0;
+            padding: 5px 10px;
+            font-weight: bold;
+            color: #333;
+            font-size: 12px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .login-btn-area {
+            background-color: #f5f5f5;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .login-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: #d35400;
+            /* Naranja estilo UTN */
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-list li {
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-list li a {
+            display: block;
+            padding: 8px 10px;
+            color: #0056b3;
+            font-size: 11px;
+            background-color: #fcfcfc;
+        }
+
+        .menu-list li a:hover {
+            background-color: #eef;
+        }
+
+        .menu-icon {
+            margin-right: 5px;
+            width: 16px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .content-area {
+            background-color: #fff;
+        }
+
+        .news-item {
+            border: 1px solid #e0e0e0;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #fff;
+        }
+
+        .news-title {
+            color: #0056b3;
+            font-size: 16px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .news-meta {
+            color: #f39c12;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        .news-body {
+            display: flex;
+            gap: 15px;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #444;
+        }
+
+        .news-img-placeholder {
+            width: 150px;
+            height: 100px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            border: 1px solid #ddd;
+            flex-shrink: 0;
+        }
+
+        /* Right Sidebar Banners */
+        .banner-placeholder {
+            width: 100%;
+            height: 60px;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .banner-large {
+            height: 120px;
+            background-color: #c0392b;
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        /* Helpers for "Img" placeholders as requested */
+        .img-placeholder-box {
+            display: block;
+            background: #ccc;
+            text-align: center;
+            color: #555;
+            font-weight: bold;
+            border: 2px dashed #999;
+            padding: 10px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        .img-placeholder-box img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div id="current-time-display">CBA | --:-- hs. | Cargando...</div>
+        <div>Buenas tardes!</div>
+        <div>Tu servicio inicial es: <strong>Educación Virtual</strong></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <!-- Logo Placeholder -->
+            <div style="position: absolute; top: 10px; left: 10px; width: 400px; height: 100px;">
+                <img src="assets/images/logo-header.png" alt="UTN Logo"
+                    style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <!-- Right Image Placeholder -->
+            <div style="position: absolute; top: 0; right: 0; width: 400px; height: 100%;">
+                <img src="assets/images/header-right.png" alt="UTN Building"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-item">Institucional</a>
+            <a href="#" class="nav-item">Carreras</a>
+            <a href="#" class="nav-item">Alumnos</a>
+            <a href="#" class="nav-item">Investigación</a>
+            <a href="#" class="nav-item">Extensión</a>
+            <div style="margin-left: auto; display: flex;">
+                <a href="#" class="nav-item"><img src="assets/images/home.png"
+                        style="height:12px; vertical-align:middle; display:none;"> 🏠 Página Principal</a>
+                <a href="#" class="nav-item">❓ Ayuda</a>
+                <a href="#" class="nav-item">📡 RSS</a>
+            </div>
+            <div class="nav-item"
+                style="border-left: 1px solid #ccc; background: #ffffe0; color: #555; font-weight: normal;">
+                💡 Alt+Shift+A = Autogestión
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+
+        <!-- LEFT SIDEBAR -->
+        <aside>
+            <div class="sidebar-box">
+                <div class="login-btn-area">
+                    <a href="index.html" class="login-btn" style="color: #d35400; font-weight: bold; font-size: 13px;">
+                        👥 Iniciar Sesión
+                    </a>
+                </div>
+
+                <ul class="menu-list">
+                    <li><a href="#" style="background: #00529b; color: white;">Leer <strong>Mis</strong>
+                            e-mails!<br><span style="font-size: 10px; font-weight: normal;">Configuración de
+                                Outlook</span></a></li>
+                    <li><a href="#" style="background: #3498db; color: white;">Ingresar a <strong>Mi</strong>
+                            Autogestión<br><span style="font-size: 10px; font-weight: normal;">Instructivo Activación
+                                Seguridad</span></a></li>
+                    <li><a href="#" style="background: #2980b9; color: white;"><strong>Mi</strong> Educación Virtual
+                            (UV)<br><span style="font-size: 10px; font-weight: normal;">Ultimas novedades!</span></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <ul class="menu-list">
+                    <li><a href="#"><span class="menu-icon">📱</span>BIBLIOTECA CENTRAL<br><span
+                                style="color: #999; font-size: 10px; padding-left: 20px;">buscar | otras
+                                bibliotecas</span></a></li>
+                    <li><a href="#"><span class="menu-icon">👨‍🏫</span>PROFESORES<br><span
+                                style="color: #999; font-size: 10px; padding-left: 20px;">cátedras</span></a></li>
+                    <li><a href="#"><span class="menu-icon">📄</span>ORDENANZAS<br><span
+                                style="color: #999; font-size: 10px; padding-left: 20px;">buscar</span></a></li>
+                    <li><a href="#"><span class="menu-icon">🌍</span>BBS<br><span
+                                style="color: #999; font-size: 10px; padding-left: 20px;">acceso</span></a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">✅ Comunidad</div>
+                <ul class="menu-list">
+                    <li><a href="#" style="font-weight: bold; color: #00529b;">ACETIQ</a></li>
+                    <li><a href="#" style="font-weight: bold; color: #00529b;">ADUT</a></li>
+                    <li><a href="#" style="font-weight: bold; color: #00529b;">AVEIT</a></li>
+                    <li><a href="#" style="font-weight: bold; color: #00529b;">CEE</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">Relaciones</div>
+                <ul class="menu-list">
+                    <li><a href="#">ABUC</a></li>
+                    <li><a href="#">Acuerdo Bibliotecas Univ. Cba.</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box" style="text-align: center; padding: 10px;">
+                <a href="#">📻 Radio UTN 94.3</a>
+            </div>
+
+            <div class="sidebar-box" style="background: #00529b; text-align: center; padding: 5px;">
+                <a href="#"
+                    style="color: white; font-weight: bold; font-size: 14px; text-transform: uppercase; display: block;">POSGRADOS</a>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">Nuestras Redes</div>
+                <ul class="menu-list">
+                    <li><a href="#">Instagram UTNFRC</a></li>
+                    <li><a href="#">Facebook UTNFRC</a></li>
+                    <li><a href="#">Youtube UTNFRC</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">Concursos</div>
+                <ul class="menu-list">
+                    <li><a href="#">Ordenanzas Concurso Docente</a></li>
+                    <li><a href="#">Concurso Profesores</a></li>
+                    <li><a href="#">Concurso Docentes Auxiliares</a></li>
+                    <li><a href="#">Llamado a Concurso Docente</a></li>
+                    <li><a href="#">Ingeniería Industrial</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">Calendarios</div>
+                <ul class="menu-list">
+                    <li><a href="#">Calendario Académico 2026</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- CENTER CONTENT -->
+        <main class="content-area">
+
+            <div style="margin-bottom: 20px;">
+                <div class="news-meta">22/12/2025 | Internacionalización Universitaria</div>
+                <div class="news-title">Programa UTN-DAAD - Convocatoria 2027</div>
+                <div class="news-body">
+                    <div style="width: 150px; flex-shrink: 0;">
+                        <img src="assets/images/news-1.png" alt="UTN DAAD" style="width: 100%; height: auto;">
+                    </div>
+                    <div>
+                        <p>La Secretaría de Relaciones Internacionales y Vinculación Tecnológica de Rectorado y el
+                            Servicio Alemán de Intercambio Académico (DAAD) informan la apertura a la Convocatoria del
+                            Programa de becas a Alemania para estudiantes de Ingeniería.</p>
+                        <a href="#">Más información</a> - <a href="#">Bases y condiciones</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">05/12/2025 | Secretaría Académica - <strong>ATENCIÓN INGRESANTES 2026</strong>
+                </div>
+                <div class="news-title">Cronograma del Seminario Universitario 2026</div>
+                <div class="news-body">
+                    <div>
+                        <p>Ya se encuentra disponible para las personas ingresantes el Cronograma del Seminario
+                            Universitario 2026, que inició el 28 de enero y finaliza el 10 de marzo.</p>
+                        <a href="#">Ver CRONOGRAMA</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">Dasuten Informa</div>
+                <div class="news-title">Horario de atención, Validez de órdenes y App</div>
+                <div class="news-body">
+                    <div>
+                        <p>A partir del 2 de febrero, Dasuten retoma su horario habitual.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Receso Administrativo -->
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">03/01/2026 | + Info</div>
+                <div class="news-title">Receso Administrativo</div>
+                <div class="news-body">
+                    <div>
+                        <p>Se informa que, debido al receso de verano, la Tesorería de la Facultad permanecerá
+                            cerrada del 5 al 30 de enero. Retomando actividades el 2 de febrero de 2026, en su
+                            horario habitual de 9 a 13 y de 15 a 19:30 hs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preinscripciones -->
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">22/12/2025 | Secretaría de Planeamiento Académico - Ingreso 2026</div>
+                <div class="news-title">Preinscripciones abiertas - Tecnicaturas Universitarias</div>
+                <div class="news-body">
+                    <div>
+                        <p>Se encuentran abiertas las preinscripciones para cursar, durante el año 2026, las
+                            Tecnicaturas Universitarias que se dictan en esta Casa de Estudios. La oferta académica
+                            está compuesta por las Tecnicaturas Universitarias en: Industrias Alimentarias,
+                            Mecatrónica, Mantenimiento Industrial; Moldes, Matrices y Dispositivos; Higiene y
+                            Seguridad en el Trabajo, Telecomunicaciones y Programación.</p>
+                        <a href="#">Más información y PREINSCRIPCIONES Tecnicaturas</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Relevamiento Discapacidad -->
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">12/12/2025 | Secretaría de Igualdad de Género y Diversidad</div>
+                <div class="news-title">Se lanzó el Primer Relevamiento Nacional de Personas con Discapacidad en la
+                    UTN</div>
+                <div class="news-body">
+                    <div>
+                        <p>Se está realizando en nuestra Facultad el primer Relevamiento Nacional de Personas con
+                            Discapacidad, destinado a estudiantes, docentes, nodocentes y personas graduadas
+                            pertenecientes a la comunidad UTN que se reconozcan en situación de discapacidad. <a
+                                href="#">Formulario de Relevamiento</a></p>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Posgrados -->
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">16/10/2025 | Secretaría de Posgrado</div>
+                <div class="news-title">Programa de Posgrados 2026</div>
+                <div class="news-body">
+                    <div>
+                        <p>Se encuentran abiertas las preinscripciones para cursar las Carreras de Posgrado 2026.
+                            Consultas: Cel. 351-3023798 (WhatsApp) – posgrado@frc.utn.edu.ar</p>
+                        <a href="#">Más información y preinscripciones</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oficios -->
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">26/12/2025 | SEU - Formación de Oficios</div>
+                <div class="news-title">Cursos para capacitarse como Auxiliar Electricista y Electricista Habilitado
+                    Categoría III</div>
+                <div class="news-body">
+                    <div>
+                        <p>Están abiertas las inscripciones para realizar los cursos de capacitación “Auxiliar
+                            Electricista Industrial”, “Electricista Habilitado Categoría III” y “Auxiliar
+                            Electricista Domiciliario”.</p>
+                        <a href="#">Más información y Formularios de Preinscripción</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Encuesta Graduados -->
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">17/10/2025 | Secretaría de Extensión Universitaria</div>
+                <div class="news-title">Encuesta Anual de Graduados/as 2025</div>
+                <div class="news-body">
+                    <div>
+                        <p>Nuestra Facultad inició el proceso de validación de acreditación de sus carreras de
+                            grado. Como parte del “Proceso de Cumplimiento de Estándares Académicos”, se lanza esta
+                            encuesta dirigida a graduados/as.</p>
+                        <a href="#">Acceder a la Encuesta</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Distancia -->
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">29/12/2025 | SEU - Educación a Distancia</div>
+                <div class="news-title">Inscripciones abiertas para cursar Diplomaturas a Distancia en 2026</div>
+                <div class="news-body">
+                    <div>
+                        <p>Se encuentran abiertas las inscripciones para realizar las Diplomaturas a Distancia sobre
+                            “Gestión de Activos y Mantenimiento con IA”, “Robótica”, “Inglés Intermedio” y
+                            “Logística”.</p>
+                        <a href="#">Más información y Formularios de Preinscripción</a>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px; background: #ffebeb; padding: 10px; border: 1px solid #ffcccc;">
+                <div class="news-title" style="color: #c0392b;">ATENCIÓN Usuarios de los Servicios de Internet</div>
+                <div class="news-body">
+                    <div>
+                        <p><strong>NUNCA revele sus Datos y Contraseña por Mail</strong><br>
+                            Ante la consulta de usuarios que han recibido en su cuenta de correo institucional
+                            mensajes solicitando el envío de datos personales, les recordamos que BAJO NINGUNA
+                            CIRCUNSTANCIA debe compartir o enviar su clave de acceso.</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside>
+            <!-- Banners -->
+            <div style="margin-bottom: 10px;">
+                <img src="assets/images/banner-ingreso.png" alt="Ingreso 2026"
+                    style="width: 100%; height: auto; display: block;">
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <img src="assets/images/banner-carreras.png" alt="Carreras"
+                    style="width: 100%; height: auto; display: block;">
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <img src="assets/images/banner-posgrado.png" alt="Posgrado"
+                    style="width: 100%; height: auto; display: block;">
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <img src="assets/images/banner-relevamiento.png" alt="Relevamiento Discapacidad"
+                    style="width: 100%; height: auto; display: block;">
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <img src="assets/images/banner-tecnicaturas.png" alt="Tecnicaturas"
+                    style="width: 100%; height: auto; display: block;">
+            </div>
+
+            <!-- Group: Servicios -->
+            <div class="sidebar-box">
+                <div class="sidebar-header" style="background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);">
+                    Servicios</div>
+                <div style="padding: 5px;">
+                    <div
+                        style="font-weight: bold; color: #00529b; font-size: 11px; margin-bottom: 5px; border-bottom: 1px solid #ddd;">
+                        Servicios Tecnológicos</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; text-align: center;">
+                        <a href="https://www.investigacion.frc.utn.edu.ar/cintra/"
+                            style="border: 1px solid #ccc; background: white; padding: 3px; font-size: 10px; display: block;">CINTRA</a>
+                        <a href="https://www.investigacion.frc.utn.edu.ar/gimse/"
+                            style="border: 1px solid #ccc; background: white; padding: 3px; font-size: 10px; display: block;">GIMSE</a>
+                        <a href="https://www.investigacion.frc.utn.edu.ar/citeq/"
+                            style="border: 1px solid #ccc; background: white; padding: 3px; font-size: 10px; display: block;">CITeQ</a>
+                        <a href="https://www.ciqa.com.ar/"
+                            style="border: 1px solid #ccc; background: white; padding: 3px; font-size: 10px; display: block;">CIQA</a>
+                    </div>
+
+                    <div
+                        style="margin-top: 10px; font-weight: bold; color: #00529b; font-size: 11px; margin-bottom: 5px; border-bottom: 1px solid #ddd;">
+                        Incubadora Córdoba</div>
+                    <div style="text-align: center;">
+                        <a href="#" style="font-weight: bold; color: #555;">Incubadora Córdoba</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group: Capacitación -->
+            <div class="sidebar-box">
+                <div class="sidebar-header" style="background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);">
+                    Capacitación</div>
+                <ul class="menu-list">
+                    <li><a href="#"><span style="color:#f39c12">»</span> Diplomaturas Superiores</a></li>
+                    <li><a href="#"><span style="color:#f39c12">»</span> Academia Cisco</a></li>
+                    <li><a href="#"><span style="color:#f39c12">»</span> Educación a Distancia</a></li>
+                    <li><a href="#"><span style="color:#f39c12">»</span> Centro de Capacitación Técnica</a></li>
+                </ul>
+            </div>
+
+
+
+            <div
+                style="margin-top: 10px; border: 1px solid #ccc; background: #f9f9f9; padding: 10px; text-align: center;">
+                <a href="/institucional/telefonos.frc" style="font-weight: bold; color: #00529b;">📞 Nuestros
+                    Teléfonos</a>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header" style="background:#00529b; color:white;">VER AQUI - Colectivos a nuestra
+                    Facu</div>
+                <div style="padding: 10px; font-size: 11px; line-height: 1.6;">
+                    <strong>Corredor 1:</strong> 13-16-18-19<br>
+                    <strong>Corredor 2:</strong> 20-22-26<br>
+                    <strong>Corredor 3:</strong> 32<br>
+                    <strong>Corredor 4:</strong> 41<br>
+                    <strong>Corredor 5:</strong> 52-53<br>
+                    <strong>Corredor 6:</strong> 66-67<br>
+                    <strong>Corredor 7:</strong> 71-73<br>
+                    <strong>Anulares:</strong> 600- 601
+                </div>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">Laboratorios</div>
+                <ul class="menu-list">
+                    <li><a href="#">Hidráulica</a></li>
+                    <li><a href="#">Bioelectrónica</a></li>
+                    <li><a href="#">Investigación Software</a></li>
+                    <li><a href="#">Central de Electrónica</a></li>
+                    <li><a href="#">LabSis</a></li>
+                    <li><a href="#">Comunicaciones</a></li>
+                    <li><a href="#">NetLabs Cisco</a></li>
+                    <li><a href="#">Física</a></li>
+                    <li><a href="#">Redes</a></li>
+                    <li><a href="#">Ingeniería y Calidad de Software</a></li>
+                    <li><a href="#">Técnicas Digitales</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">Buscador</div>
+                <div style="padding: 10px; text-align: center;">
+                    <div style="margin-bottom: 5px;">
+                        <strong style="color: #00529b; font-size: 16px;">Google</strong>
+                    </div>
+                    <input type="text" placeholder="Buscar..."
+                        style="width: 70%; padding: 4px; border: 1px solid #ccc;">
+                    <button
+                        style="background: #ddd; border: 1px solid #ccc; padding: 4px 8px; cursor: pointer; color: #333; font-weight: bold;">Buscar</button>
+                </div>
+            </div>
+
+            <div style="margin-top: 10px; text-align: center;">
+                <a href="#"
+                    style="display: flex; align-items: center; justify-content: start; background: #3b5998; color: white; padding: 8px 10px; margin-bottom: 5px; font-weight: bold; border-radius: 4px; font-size: 14px;">
+                    <span style="font-size: 18px; margin-right: 10px;">f</span> Facebook UTNFRC
+                </a>
+                <a href="#"
+                    style="display: flex; align-items: center; justify-content: start; background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: white; padding: 8px 10px; margin-bottom: 5px; font-weight: bold; border-radius: 4px; font-size: 14px;">
+                    <span style="font-size: 18px; margin-right: 10px;">📸</span> Instagram UTNFRC
+                </a>
+                <a href="#"
+                    style="display: flex; align-items: center; justify-content: start; background: #c4302b; color: white; padding: 8px 10px; margin-bottom: 5px; font-weight: bold; border-radius: 4px; font-size: 14px;">
+                    <span style="font-size: 18px; margin-right: 10px;">▶</span> Youtube UTNFRC
+                </a>
+            </div>
+
+            <div style="margin-top: 15px; text-align: center; margin-bottom: 10px;">
+                <div
+                    style="border: 1px solid #ccc; padding: 2px 5px; display: inline-block; background: white; font-family: sans-serif; font-size: 10px;">
+                    <span style="font-weight: bold; color: #555;">wifi</span> <span
+                        style="font-weight: bold; color: #00529b; font-size: 12px;">IPv6</span> <span
+                        style="color: #555;">Enabled</span>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        Universidad Tecnológica Nacional - Facultad Regional Córdoba <br>
+        Maestro M. Lopez esq. Cruz Roja Argentina (X5016ZAA) Ciudad Universitaria - Córdoba - Argentina<br>
+        Teléfono: +54 - (0)351 - 5986000 - Fax: +54 - (0)351 - 5986029<br>
+        <br>
+        &copy; 1998 - 2026 Cómputos - UTNFRC
+    </footer>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+
+            // Format time: HH:mm hs.
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            const timeString = `${hours}:${minutes} hs.`;
+
+            // Format date: DayName, DD de MonthName de YYYY
+            const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+            const dayName = days[now.getDay()];
+            const day = now.getDate();
+            const dayFormatted = day < 10 ? '0' + day : day;
+            const monthName = months[now.getMonth()];
+            const year = now.getFullYear();
+
+            const dateString = `${dayName}, ${dayFormatted} de ${monthName} de ${year}`;
+
+            // Update DOM
+            const displayElement = document.getElementById('current-time-display');
+            if (displayElement) {
+                displayElement.innerHTML = `CBA | ${timeString} | ${dateString}`;
+            }
+        }
+
+        // Update immediately and then every second
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+
+</html>
