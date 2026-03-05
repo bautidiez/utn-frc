@@ -2,594 +2,767 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Universidad Tecnológica Nacional - Facultad Regional Córdoba</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Bootstrap & FontAwesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link href="Autogestión Académica 4_files/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universidad Tecnológica Nacional - Facultad Regional Córdoba</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <style>
+        :root {
+            --primary-blue: #00529b;
+            /* Azul UTN aproximado */
+            --light-blue: #e8f0f8;
+            --border-color: #ddd;
+            --text-color: #333;
+            --link-color: #0056b3;
+            --header-bg: #fff;
+        }
 
-  <style>
-    body {
-      font-family: Verdana, Arial, Helvetica, sans-serif;
-      background-color: #ffffff;
-      margin: 0;
-      padding: 0;
-      color: #333;
-      font-size: 11px;
-    }
+        body {
+            font-family: Verdana, Geneva, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: var(--text-color);
+            font-size: 11px;
+            line-height: 1.4;
+        }
 
-    /* Header */
-    .header-top {
-      background-color: #ffffff;
-      border-bottom: 1px solid #a0a0a0;
-      padding: 3px 15px;
-      font-size: 10px;
-      color: #666;
-      height: 24px;
-      line-height: 18px;
-    }
+        a {
+            text-decoration: none;
+            color: var(--link-color);
+        }
 
-    .header-top .pull-right {
-      text-align: right;
-      float: right;
-    }
+        a:hover {
+            text-decoration: underline;
+        }
 
-    .header-main {
-      background: #3673a5;
-      /* Exact UTN Blue */
-      background: linear-gradient(to right, #3673a5 0%, #3673a5 55%, #ffffff 100%);
-      height: 90px;
-      display: flex;
-      align-items: center;
-      padding-left: 10px;
-      overflow: hidden;
-      border-bottom: 4px solid #b0c4de;
-    }
+        /* Top Bar */
+        .top-bar {
+            background-color: #f5f5f5;
+            padding: 5px 20px;
+            font-size: 11px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+        }
 
-    .header-main-right {
-      flex-grow: 1;
-      /* Placeholder for building image */
-      background: transparent;
-      height: 100%;
-    }
+        /* Header */
+        header {
+            background: rgb(0, 78, 162);
+            background: linear-gradient(90deg, rgba(0, 78, 162, 1) 0%, rgba(57, 126, 204, 1) 100%);
+            height: 120px;
+            position: relative;
+        }
 
-    /* Navigation (Subnav) */
-    .subnav {
-      background-color: #f5f5f5;
-      border-bottom: 1px solid #c0c0c0;
-      border-top: 1px solid #fff;
-      padding: 0;
-      margin-bottom: 20px;
-      height: 25px;
-      background: linear-gradient(to bottom, #ffffff 0%, #eeeeee 100%);
-    }
+        .header-content {
+            width: 980px;
+            margin: 0 auto;
+            position: relative;
+            height: 100%;
+        }
 
-    .subnav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      padding-left: 3px;
-    }
+        .logo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
 
-    .subnav li {
-      padding: 5px 12px;
-      border-right: 1px solid #ccc;
-      border-left: 1px solid #fff;
-    }
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            border-bottom: 1px solid #ccc;
+            border-top: 1px solid #ccc;
+        }
 
-    .subnav li:first-child {
-      border-left: none;
-    }
+        .nav-container {
+            width: 980px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+        }
 
-    .subnav li a {
-      text-decoration: none;
-      color: #3673a5;
-      font-size: 11px;
-      font-family: Verdana;
-    }
+        .nav-item {
+            padding: 8px 15px;
+            color: #00529b;
+            font-weight: bold;
+            font-size: 12px;
+            border-right: 1px solid #eee;
+        }
 
-    .subnav li a:hover {
-      text-decoration: underline;
-    }
+        .nav-item:hover {
+            background-color: #f0f0f0;
+            text-decoration: none;
+        }
 
-    /* Login Layout */
-    .login-container {
-      width: 980px;
-      margin: 0 auto;
-      display: flex;
-      padding-top: 25px;
-    }
+        /* Main Container */
+        .main-container {
+            width: 980px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr 280px;
+            /* Left Sidebar, Content, Right Sidebar(Larger) */
+            gap: 10px;
+            padding-top: 10px;
+        }
 
-    .login-left {
-      width: 500px;
-      padding-right: 25px;
-      text-align: center;
-      border-right: 1px dotted #ccc;
-      position: relative;
-      min-height: 400px;
-    }
+        /* Sidebars */
+        .sidebar-box {
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #f9f9f9;
+        }
 
-    .login-right {
-      flex-grow: 1;
-      padding-left: 25px;
-    }
+        .sidebar-header {
+            background-color: #e0e0e0;
+            padding: 5px 10px;
+            font-weight: bold;
+            color: #333;
+            font-size: 12px;
+            border-bottom: 1px solid #ccc;
+        }
 
-    /* Login Form Colors */
-    h2.start-session {
-      color: #ff6600;
-      /* Distinctive Orange */
-      font-size: 14px;
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      text-align: left;
-      margin-left: 135px;
-      /* Precision alignment */
-      font-family: Verdana;
-    }
+        .login-btn-area {
+            background-color: #f5f5f5;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
 
-    /* Simulated Keys - Trying to match the image exactly */
-    .keys-container {
-      position: absolute;
-      left: 10px;
-      top: 0;
-      width: 80px;
-      height: 120px;
-    }
+        .login-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: #d35400;
+            /* Naranja estilo UTN */
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
 
-    /* Silver Key (Vertical) */
-    .key-silver {
-      color: #888;
-      font-size: 95px;
-      position: absolute;
-      left: 5px;
-      top: 15px;
-      transform: scaleY(-1);
-      z-index: 1;
-      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
-    }
+        .menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-    /* Gold Key (Angled) */
-    .key-gold {
-      color: #ffcc00;
-      font-size: 95px;
-      position: absolute;
-      left: 25px;
-      top: 18px;
-      transform: rotate(35deg);
-      z-index: 2;
-      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
-    }
+        .menu-list li {
+            border-bottom: 1px solid #eee;
+        }
 
-    /* Ring */
-    .key-ring {
-      border: 5px solid #ccc;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      position: absolute;
-      top: 0px;
-      left: 20px;
-      z-index: 0;
-      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-      background: transparent;
-    }
+        .menu-list li a {
+            display: block;
+            padding: 8px 10px;
+            color: #0056b3;
+            font-size: 11px;
+            background-color: #fcfcfc;
+        }
 
-    .form-group {
-      margin-bottom: 6px;
-      text-align: right;
-      padding-right: 80px;
-    }
+        .menu-list li a:hover {
+            background-color: #eef;
+        }
 
-    .form-group label {
-      color: #3673a5;
-      font-weight: bold;
-      font-size: 11px;
-      margin-right: 3px;
-      font-family: Verdana;
-    }
+        .menu-icon {
+            margin-right: 5px;
+            width: 16px;
+            display: inline-block;
+            text-align: center;
+        }
 
-    .form-control-sm {
-      width: 146px;
-      /* Exact pixel match attempt */
-      height: 20px;
-      padding: 1px 2px;
-      font-size: 11px;
-      border: 1px solid #7f9db9;
-      margin-bottom: 2px;
-      font-family: Verdana;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-    }
+        /* Main Content */
+        .content-area {
+            background-color: #fff;
+        }
 
-    /* The @frc dropdown specific style */
-    select.form-control-sm {
-      height: 22px;
-      /* Slightly taller for OS widgets */
-    }
+        .news-item {
+            border: 1px solid #e0e0e0;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #fff;
+        }
 
-    .warning-text {
-      color: #ff6600;
-      font-size: 10px;
-      font-weight: bold;
-      margin-top: 12px;
-      margin-bottom: 12px;
-      text-align: right;
-      padding-right: 80px;
-      line-height: 1.3;
-      font-family: Verdana;
-    }
+        .news-title {
+            color: #0056b3;
+            font-size: 16px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
 
-    /* Checkbox row */
-    .remember-row {
-      font-size: 10px;
-      color: #666;
-      text-align: right;
-      margin-bottom: 20px;
-      padding-right: 80px;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
+        .news-meta {
+            color: #f39c12;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
 
-    .remember-row input {
-      margin: 0 4px 0 0;
-      vertical-align: middle;
-    }
+        .news-body {
+            display: flex;
+            gap: 15px;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #444;
+        }
 
-    .btn-login {
-      background: #e6e6e6;
-      border: 1px solid #707070;
-      padding: 2px 12px;
-      font-size: 11px;
-      color: #000;
-      border-radius: 3px;
-      cursor: pointer;
-      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-      font-family: Verdana;
-      background: linear-gradient(to bottom, #f0f0f0 0%, #e0e0e0 100%);
-    }
+        .news-img-placeholder {
+            width: 150px;
+            height: 100px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            border: 1px solid #ddd;
+            flex-shrink: 0;
+        }
 
-    .btn-login:hover {
-      background: #e0e0e0;
-      border-color: #666;
-    }
+        /* Right Sidebar Banners */
+        .banner-placeholder {
+            width: 100%;
+            height: 60px;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 12px;
+        }
 
-    /* Button Container */
-    .btn-container {
-      text-align: right;
-      padding-right: 115px;
-      /* Center relative to inputs */
-    }
+        .banner-large {
+            height: 120px;
+            background-color: #c0392b;
+        }
 
-    /* Right Side Info Box */
-    .info-intro {
-      color: #3673a5;
-      margin-bottom: 15px;
-      font-size: 11px;
-      line-height: 1.5;
-      font-family: Verdana;
-    }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            font-size: 11px;
+            text-align: center;
+        }
 
-    .info-title-orange {
-      color: #ff6600;
-      font-weight: bold;
-      font-size: 12px;
-      margin-bottom: 5px;
-      font-family: Verdana;
-    }
+        /* Helpers for "Img" placeholders as requested */
+        .img-placeholder-box {
+            display: block;
+            background: #ccc;
+            text-align: center;
+            color: #555;
+            font-weight: bold;
+            border: 2px dashed #999;
+            padding: 10px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
 
-    /* The blue box for the checklist */
-    .info-box {
-      background: #3673a5;
-      background: linear-gradient(to bottom, #3673a5 0%, #1e527f 100%);
-      border: 1px solid #1f4e75;
-      /* Darker border */
-      padding: 15px 15px 15px 40px;
-      margin-top: 5px;
-      min-height: 120px;
-      width: 100%;
-    }
-
-    .service-list {
-      display: flex;
-      flex-wrap: wrap;
-      color: white;
-      font-family: Verdana;
-      font-size: 11px;
-    }
-
-    .service-item {
-      width: 50%;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-    }
-
-    .service-item input {
-      margin-right: 5px;
-      margin-top: 0;
-      vertical-align: top;
-    }
-
-    /* Help Section */
-    .help-box {
-      text-align: center;
-      margin-top: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-right: 50px;
-    }
-
-    .help-icon-circle {
-      width: 55px;
-      height: 55px;
-      background: radial-gradient(circle at 30% 30%, #fefefe, #d1d1d1);
-      border-radius: 50%;
-      line-height: 55px;
-      text-align: center;
-      color: #999;
-      font-size: 38px;
-      box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
-      text-shadow: 1px 1px 1px #fff;
-      margin-right: 15px;
-      font-weight: bold;
-      font-family: Arial;
-      border: 1px solid #ccc;
-    }
-
-    .help-text {
-      text-align: left;
-    }
-
-    .help-title {
-      color: #3673a5;
-      font-weight: bold;
-      font-size: 11px;
-      text-transform: uppercase;
-    }
-
-    .help-link {
-      color: #3673a5;
-      font-weight: bold;
-      font-size: 13px;
-      text-decoration: none;
-    }
-
-    .help-link:hover {
-      text-decoration: underline;
-    }
-
-    .footer-links {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 10px;
-      color: #ff6600;
-      font-family: Verdana;
-    }
-
-    .footer-links a {
-      color: #ff6600;
-      text-decoration: none;
-      margin: 0 5px;
-    }
-
-    .footer-links a:hover {
-      text-decoration: underline;
-    }
-  </style>
+        .img-placeholder-box img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- Top Header -->
-  <div class="header-top">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-6" style="padding-left: 20px;">
-          CBA | <i class="fa fa-clock-o"></i> <span id="clock-time"></span> | <i class="fa fa-calendar"></i> <span
-            id="clock-date"></span>
-        </div>
-        <!-- Float right explicitly to match old bootstrap behavior if needed -->
-        <div class="col-xs-6 pull-right" style="text-align: right; padding-right: 20px;">
-          Buen día! <span style="color:#3673a5; font-weight:bold;">Diez Bautista Pablo</span> | Tu servicio inicial es:
-          <span style="color:#3673a5; font-weight:bold;">Autogestión</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main Header -->
-  <div class="header-main">
-    <!-- Logo Area -->
-    <div style="display:flex; align-items:center; margin-left:10px;">
-      <img src="Autogestión Académica 4_files/utnfrc16.png"
-        style="height:62px; margin-right:15px; filter: brightness(0) invert(1);">
-      <div style="color:white; font-family: Arial, Helvetica, sans-serif;">
-        <div style="font-size:18px; font-weight:bold; letter-spacing:0.5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
-          UNIVERSIDAD TECNOLÓGICA NACIONAL</div>
-        <div
-          style="font-size:13px; font-weight:normal; letter-spacing:1px; margin-top:3px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
-          FACULTAD REGIONAL CORDOBA</div>
-      </div>
-    </div>
-    <div class="header-main-right"></div>
-  </div>
-
-  <!-- Navigation -->
-  <div class="subnav">
-    <ul>
-      <li><a href="#">Institucional</a></li>
-      <li><a href="#">Carreras</a></li>
-      <li><a href="#">Alumnos</a></li>
-      <li><a href="#">Investigación</a></li>
-      <li><a href="#">Extensión</a></li>
-      <li style="border-left:1px solid #ccc; margin-left:5px; padding-left:15px;"><a href="#"><i class="fa fa-home"
-            style="color:#ff6600;"></i> Página Principal</a></li>
-      <li><a href="#"><i class="fa fa-question-circle" style="color:#3673a5;"></i> Ayuda</a></li>
-      <li><a href="#"><i class="fa fa-rss" style="color:#ff6600;"></i> RSS</a></li>
-    </ul>
-  </div>
-
-  <!-- Login Content -->
-  <div class="login-container">
-
-    <!-- Left Side: Login Form -->
-    <div class="login-left">
-      <div class="keys-container">
-        <!-- Simulated Keys -->
-        <div class="key-ring"></div>
-        <i class="fa fa-key key-silver"></i>
-        <i class="fa fa-key key-gold"></i>
-      </div>
-
-      <!-- Form Block -->
-      <div>
-        <h2 class="start-session">INICIAR SESION</h2>
-
-        <form id="loginForm">
-          <div class="form-group">
-            <label>Usuario:</label>
-            <input type="text" id="txtUsuario" class="form-control-sm">
-          </div>
-          <div class="form-group" style="position:relative; white-space:nowrap;">
-            <label style="margin-right:2px;">@</label>
-            <select class="form-control-sm" style="width:150px;">
-              <option selected>frc</option>
-              <option>Civil</option>
-              <option>Eléctrica</option>
-              <option>Electrónica</option>
-              <option>Industrial</option>
-              <option>Mecánica</option>
-              <option>Metalúrgica</option>
-              <option>Química</option>
-              <option>Sistemas</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Contraseña:</label>
-            <input type="password" id="txtPassword" class="form-control-sm">
-          </div>
-
-          <div class="warning-text">
-            Recordá que tu contraseña<br>
-            distingue MAYUSCULAS y<br>
-            minúsculas.
-          </div>
-
-          <div class="remember-row">
-            <input type="checkbox"> Recordar mi usuario y servicio.
-          </div>
-
-          <div class="btn-container">
-            <button type="submit" class="btn-login">Iniciar Sesión</button>
-          </div>
-        </form>
-      </div>
-
-      <!-- Help Section -->
-      <div class="help-box">
-        <div class="help-icon-circle">?</div>
-        <div class="help-text">
-          <div class="help-title">AYUDA</div>
-          <a href="#" class="help-link">¿Has olvidado tu<br>contraseña? >></a>
-        </div>
-      </div>
-      <div class="footer-links">
-        <a href="#">» Soy Docente?</a> <a href="#">Soy Egresado?</a> <a href="#">Soy Alumno?</a><br>
-        <a href="#">» Vaciar el Cache y Eliminación de las Cookies.</a>
-      </div>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div id="current-time-display">CBA | --:-- hs. | Cargando...</div>
+        <div>Buenas tardes!</div>
+        <div>Tu servicio inicial es: <strong>Educación Virtual</strong></div>
     </div>
 
-    <!-- Right Side: Info -->
-    <div class="login-right">
-      <div class="info-intro">
-        Ingresa a tu sesión y accede a todos los <span style="font-weight:bold; color:#3673a5;">Servicios</span> que te
-        ofrece <span style="font-weight:bold; color:#3673a5;">Nuestra Facultad</span>.
-      </div>
-
-      <div class="info-title-orange">
-        Al Iniciar la Sesión INGRESA DIRECTAMENTE a:
-      </div>
-
-      <!-- The blue box for the checklist -->
-      <div class="info-box">
-        <div class="service-list">
-          <div class="service-item">
-            <input type="checkbox"> <span style="margin-left:5px;">Web Principal</span>
-          </div>
-          <div class="service-item">
-            <input type="checkbox"> <span style="margin-left:5px;">UV</span>
-          </div>
-          <div class="service-item">
-            <input type="checkbox"> <span style="margin-left:5px;">Correo</span>
-          </div>
-          <div class="service-item">
-            <input type="checkbox"> <span style="margin-left:5px;">Portal</span>
-          </div>
-          <div class="service-item">
-            <input type="checkbox" checked> <span style="margin-left:5px; font-weight:bold;">Autogestión</span>
-          </div>
-          <div class="service-item">
-            <input type="checkbox"> <span style="margin-left:5px;">Prensa y Protocolo</span>
-          </div>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <!-- Logo Placeholder -->
+            <div style="position: absolute; top: 10px; left: 10px; width: 400px; height: 100px;">
+                <img src="assets/images/logo-header.png" alt="UTN Logo"
+                    style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <!-- Right Image Placeholder -->
+            <div style="position: absolute; top: 0; right: 0; width: 400px; height: 100%;">
+                <img src="assets/images/header-right.png" alt="UTN Building"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
         </div>
-      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-item">Institucional</a>
+            <a href="#" class="nav-item">Carreras</a>
+            <a href="#" class="nav-item">Alumnos</a>
+            <a href="#" class="nav-item">Investigación</a>
+            <a href="#" class="nav-item">Extensión</a>
+            <div style="margin-left: auto; display: flex;">
+                <a href="#" class="nav-item"><img src="assets/images/home.png"
+                        style="height:12px; vertical-align:middle; display:none;"> 🏠 Página Principal</a>
+                <a href="#" class="nav-item">❓ Ayuda</a>
+                <a href="#" class="nav-item">📡 RSS</a>
+            </div>
+            <div class="nav-item"
+                style="border-left: 1px solid #ccc; background: #ffffe0; color: #555; font-weight: normal;">
+                💡 Alt+Shift+A = Autogestión
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+
+        <!-- LEFT SIDEBAR -->
+        <aside>
+            <div class="sidebar-box">
+                <div class="login-btn-area">
+                    <a href="index.html" class="login-btn" style="color: #d35400; font-weight: bold; font-size: 13px;">
+                        👥 Iniciar Sesión
+                    </a>
+                </div>
+
+                <ul class="menu-list">
+                    <li><a href="#" style="background: #00529b; color: white;">Leer <strong>Mis</strong>
+                            e-mails!<br><span style="font-size: 10px; font-weight: normal;">Configuración de
+                                Outlook</span></a></li>
+                    <li><a href="#" style="background: #3498db; color: white;">Ingresar a <strong>Mi</strong>
+                            Autogestión<br><span style="font-size: 10px; font-weight: normal;">Instructivo Activación
+                                Seguridad</span></a></li>
+                    <li><a href="#" style="background: #2980b9; color: white;"><strong>Mi</strong> Educación Virtual
+                            (UV)<br><span style="font-size: 10px; font-weight: normal;">Ultimas novedades!</span></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <ul class="menu-list">
+                    <li><a href="#"><span class="menu-icon">📱</span>BIBLIOTECA CENTRAL<br><span
+                                style="color: #999; font-size: 10px; padding-left: 20px;">buscar | otras
+                                bibliotecas</span></a></li>
+                    <li><a href="#"><span class="menu-icon">👨‍🏫</span>PROFESORES<br><span
+                                style="color: #999; font-size: 10px; padding-left: 20px;">cátedras</span></a></li>
+                    <li><a href="#"><span class="menu-icon">📄</span>ORDENANZAS<br><span
+                                style="color: #999; font-size: 10px; padding-left: 20px;">buscar</span></a></li>
+                    <li><a href="#"><span class="menu-icon">🌍</span>BBS<br><span
+                                style="color: #999; font-size: 10px; padding-left: 20px;">acceso</span></a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">✅ Comunidad</div>
+                <ul class="menu-list">
+                    <li><a href="#" style="font-weight: bold; color: #00529b;">ACETIQ</a></li>
+                    <li><a href="#" style="font-weight: bold; color: #00529b;">ADUT</a></li>
+                    <li><a href="#" style="font-weight: bold; color: #00529b;">AVEIT</a></li>
+                    <li><a href="#" style="font-weight: bold; color: #00529b;">CEE</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">Relaciones</div>
+                <ul class="menu-list">
+                    <li><a href="#">ABUC</a></li>
+                    <li><a href="#">Acuerdo Bibliotecas Univ. Cba.</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box" style="text-align: center; padding: 10px;">
+                <a href="#">📻 Radio UTN 94.3</a>
+            </div>
+
+            <div class="sidebar-box" style="background: #00529b; text-align: center; padding: 5px;">
+                <a href="#"
+                    style="color: white; font-weight: bold; font-size: 14px; text-transform: uppercase; display: block;">POSGRADOS</a>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">Nuestras Redes</div>
+                <ul class="menu-list">
+                    <li><a href="#">Instagram UTNFRC</a></li>
+                    <li><a href="#">Facebook UTNFRC</a></li>
+                    <li><a href="#">Youtube UTNFRC</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">Concursos</div>
+                <ul class="menu-list">
+                    <li><a href="#">Ordenanzas Concurso Docente</a></li>
+                    <li><a href="#">Concurso Profesores</a></li>
+                    <li><a href="#">Concurso Docentes Auxiliares</a></li>
+                    <li><a href="#">Llamado a Concurso Docente</a></li>
+                    <li><a href="#">Ingeniería Industrial</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">Calendarios</div>
+                <ul class="menu-list">
+                    <li><a href="#">Calendario Académico 2026</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- CENTER CONTENT -->
+        <main class="content-area">
+
+            <div style="margin-bottom: 20px;">
+                <div class="news-meta">22/12/2025 | Internacionalización Universitaria</div>
+                <div class="news-title">Programa UTN-DAAD - Convocatoria 2027</div>
+                <div class="news-body">
+                    <div style="width: 150px; flex-shrink: 0;">
+                        <img src="assets/images/news-1.png" alt="UTN DAAD" style="width: 100%; height: auto;">
+                    </div>
+                    <div>
+                        <p>La Secretaría de Relaciones Internacionales y Vinculación Tecnológica de Rectorado y el
+                            Servicio Alemán de Intercambio Académico (DAAD) informan la apertura a la Convocatoria del
+                            Programa de becas a Alemania para estudiantes de Ingeniería.</p>
+                        <a href="#">Más información</a> - <a href="#">Bases y condiciones</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">05/12/2025 | Secretaría Académica - <strong>ATENCIÓN INGRESANTES 2026</strong>
+                </div>
+                <div class="news-title">Cronograma del Seminario Universitario 2026</div>
+                <div class="news-body">
+                    <div>
+                        <p>Ya se encuentra disponible para las personas ingresantes el Cronograma del Seminario
+                            Universitario 2026, que inició el 28 de enero y finaliza el 10 de marzo.</p>
+                        <a href="#">Ver CRONOGRAMA</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">Dasuten Informa</div>
+                <div class="news-title">Horario de atención, Validez de órdenes y App</div>
+                <div class="news-body">
+                    <div>
+                        <p>A partir del 2 de febrero, Dasuten retoma su horario habitual.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Receso Administrativo -->
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">03/01/2026 | + Info</div>
+                <div class="news-title">Receso Administrativo</div>
+                <div class="news-body">
+                    <div>
+                        <p>Se informa que, debido al receso de verano, la Tesorería de la Facultad permanecerá
+                            cerrada del 5 al 30 de enero. Retomando actividades el 2 de febrero de 2026, en su
+                            horario habitual de 9 a 13 y de 15 a 19:30 hs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preinscripciones -->
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">22/12/2025 | Secretaría de Planeamiento Académico - Ingreso 2026</div>
+                <div class="news-title">Preinscripciones abiertas - Tecnicaturas Universitarias</div>
+                <div class="news-body">
+                    <div>
+                        <p>Se encuentran abiertas las preinscripciones para cursar, durante el año 2026, las
+                            Tecnicaturas Universitarias que se dictan en esta Casa de Estudios. La oferta académica
+                            está compuesta por las Tecnicaturas Universitarias en: Industrias Alimentarias,
+                            Mecatrónica, Mantenimiento Industrial; Moldes, Matrices y Dispositivos; Higiene y
+                            Seguridad en el Trabajo, Telecomunicaciones y Programación.</p>
+                        <a href="#">Más información y PREINSCRIPCIONES Tecnicaturas</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Relevamiento Discapacidad -->
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">12/12/2025 | Secretaría de Igualdad de Género y Diversidad</div>
+                <div class="news-title">Se lanzó el Primer Relevamiento Nacional de Personas con Discapacidad en la
+                    UTN</div>
+                <div class="news-body">
+                    <div>
+                        <p>Se está realizando en nuestra Facultad el primer Relevamiento Nacional de Personas con
+                            Discapacidad, destinado a estudiantes, docentes, nodocentes y personas graduadas
+                            pertenecientes a la comunidad UTN que se reconozcan en situación de discapacidad. <a
+                                href="#">Formulario de Relevamiento</a></p>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Posgrados -->
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">16/10/2025 | Secretaría de Posgrado</div>
+                <div class="news-title">Programa de Posgrados 2026</div>
+                <div class="news-body">
+                    <div>
+                        <p>Se encuentran abiertas las preinscripciones para cursar las Carreras de Posgrado 2026.
+                            Consultas: Cel. 351-3023798 (WhatsApp) – posgrado@frc.utn.edu.ar</p>
+                        <a href="#">Más información y preinscripciones</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oficios -->
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">26/12/2025 | SEU - Formación de Oficios</div>
+                <div class="news-title">Cursos para capacitarse como Auxiliar Electricista y Electricista Habilitado
+                    Categoría III</div>
+                <div class="news-body">
+                    <div>
+                        <p>Están abiertas las inscripciones para realizar los cursos de capacitación “Auxiliar
+                            Electricista Industrial”, “Electricista Habilitado Categoría III” y “Auxiliar
+                            Electricista Domiciliario”.</p>
+                        <a href="#">Más información y Formularios de Preinscripción</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Encuesta Graduados -->
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">17/10/2025 | Secretaría de Extensión Universitaria</div>
+                <div class="news-title">Encuesta Anual de Graduados/as 2025</div>
+                <div class="news-body">
+                    <div>
+                        <p>Nuestra Facultad inició el proceso de validación de acreditación de sus carreras de
+                            grado. Como parte del “Proceso de Cumplimiento de Estándares Académicos”, se lanza esta
+                            encuesta dirigida a graduados/as.</p>
+                        <a href="#">Acceder a la Encuesta</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Distancia -->
+            <div style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px;">
+                <div class="news-meta">29/12/2025 | SEU - Educación a Distancia</div>
+                <div class="news-title">Inscripciones abiertas para cursar Diplomaturas a Distancia en 2026</div>
+                <div class="news-body">
+                    <div>
+                        <p>Se encuentran abiertas las inscripciones para realizar las Diplomaturas a Distancia sobre
+                            “Gestión de Activos y Mantenimiento con IA”, “Robótica”, “Inglés Intermedio” y
+                            “Logística”.</p>
+                        <a href="#">Más información y Formularios de Preinscripción</a>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                style="margin-bottom: 20px; border-top: 1px dotted #ccc; padding-top: 10px; background: #ffebeb; padding: 10px; border: 1px solid #ffcccc;">
+                <div class="news-title" style="color: #c0392b;">ATENCIÓN Usuarios de los Servicios de Internet</div>
+                <div class="news-body">
+                    <div>
+                        <p><strong>NUNCA revele sus Datos y Contraseña por Mail</strong><br>
+                            Ante la consulta de usuarios que han recibido en su cuenta de correo institucional
+                            mensajes solicitando el envío de datos personales, les recordamos que BAJO NINGUNA
+                            CIRCUNSTANCIA debe compartir o enviar su clave de acceso.</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside>
+            <!-- Banners -->
+            <div style="margin-bottom: 10px;">
+                <img src="assets/images/banner-ingreso.png" alt="Ingreso 2026"
+                    style="width: 100%; height: auto; display: block;">
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <img src="assets/images/banner-carreras.png" alt="Carreras"
+                    style="width: 100%; height: auto; display: block;">
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <img src="assets/images/banner-posgrado.png" alt="Posgrado"
+                    style="width: 100%; height: auto; display: block;">
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <img src="assets/images/banner-relevamiento.png" alt="Relevamiento Discapacidad"
+                    style="width: 100%; height: auto; display: block;">
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <img src="assets/images/banner-tecnicaturas.png" alt="Tecnicaturas"
+                    style="width: 100%; height: auto; display: block;">
+            </div>
+
+            <!-- Group: Servicios -->
+            <div class="sidebar-box">
+                <div class="sidebar-header" style="background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);">
+                    Servicios</div>
+                <div style="padding: 5px;">
+                    <div
+                        style="font-weight: bold; color: #00529b; font-size: 11px; margin-bottom: 5px; border-bottom: 1px solid #ddd;">
+                        Servicios Tecnológicos</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; text-align: center;">
+                        <a href="https://www.investigacion.frc.utn.edu.ar/cintra/"
+                            style="border: 1px solid #ccc; background: white; padding: 3px; font-size: 10px; display: block;">CINTRA</a>
+                        <a href="https://www.investigacion.frc.utn.edu.ar/gimse/"
+                            style="border: 1px solid #ccc; background: white; padding: 3px; font-size: 10px; display: block;">GIMSE</a>
+                        <a href="https://www.investigacion.frc.utn.edu.ar/citeq/"
+                            style="border: 1px solid #ccc; background: white; padding: 3px; font-size: 10px; display: block;">CITeQ</a>
+                        <a href="https://www.ciqa.com.ar/"
+                            style="border: 1px solid #ccc; background: white; padding: 3px; font-size: 10px; display: block;">CIQA</a>
+                    </div>
+
+                    <div
+                        style="margin-top: 10px; font-weight: bold; color: #00529b; font-size: 11px; margin-bottom: 5px; border-bottom: 1px solid #ddd;">
+                        Incubadora Córdoba</div>
+                    <div style="text-align: center;">
+                        <a href="#" style="font-weight: bold; color: #555;">Incubadora Córdoba</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group: Capacitación -->
+            <div class="sidebar-box">
+                <div class="sidebar-header" style="background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);">
+                    Capacitación</div>
+                <ul class="menu-list">
+                    <li><a href="#"><span style="color:#f39c12">»</span> Diplomaturas Superiores</a></li>
+                    <li><a href="#"><span style="color:#f39c12">»</span> Academia Cisco</a></li>
+                    <li><a href="#"><span style="color:#f39c12">»</span> Educación a Distancia</a></li>
+                    <li><a href="#"><span style="color:#f39c12">»</span> Centro de Capacitación Técnica</a></li>
+                </ul>
+            </div>
+
+
+
+            <div
+                style="margin-top: 10px; border: 1px solid #ccc; background: #f9f9f9; padding: 10px; text-align: center;">
+                <a href="/institucional/telefonos.frc" style="font-weight: bold; color: #00529b;">📞 Nuestros
+                    Teléfonos</a>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header" style="background:#00529b; color:white;">VER AQUI - Colectivos a nuestra
+                    Facu</div>
+                <div style="padding: 10px; font-size: 11px; line-height: 1.6;">
+                    <strong>Corredor 1:</strong> 13-16-18-19<br>
+                    <strong>Corredor 2:</strong> 20-22-26<br>
+                    <strong>Corredor 3:</strong> 32<br>
+                    <strong>Corredor 4:</strong> 41<br>
+                    <strong>Corredor 5:</strong> 52-53<br>
+                    <strong>Corredor 6:</strong> 66-67<br>
+                    <strong>Corredor 7:</strong> 71-73<br>
+                    <strong>Anulares:</strong> 600- 601
+                </div>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">Laboratorios</div>
+                <ul class="menu-list">
+                    <li><a href="#">Hidráulica</a></li>
+                    <li><a href="#">Bioelectrónica</a></li>
+                    <li><a href="#">Investigación Software</a></li>
+                    <li><a href="#">Central de Electrónica</a></li>
+                    <li><a href="#">LabSis</a></li>
+                    <li><a href="#">Comunicaciones</a></li>
+                    <li><a href="#">NetLabs Cisco</a></li>
+                    <li><a href="#">Física</a></li>
+                    <li><a href="#">Redes</a></li>
+                    <li><a href="#">Ingeniería y Calidad de Software</a></li>
+                    <li><a href="#">Técnicas Digitales</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">Buscador</div>
+                <div style="padding: 10px; text-align: center;">
+                    <div style="margin-bottom: 5px;">
+                        <strong style="color: #00529b; font-size: 16px;">Google</strong>
+                    </div>
+                    <input type="text" placeholder="Buscar..."
+                        style="width: 70%; padding: 4px; border: 1px solid #ccc;">
+                    <button
+                        style="background: #ddd; border: 1px solid #ccc; padding: 4px 8px; cursor: pointer; color: #333; font-weight: bold;">Buscar</button>
+                </div>
+            </div>
+
+            <div style="margin-top: 10px; text-align: center;">
+                <a href="#"
+                    style="display: flex; align-items: center; justify-content: start; background: #3b5998; color: white; padding: 8px 10px; margin-bottom: 5px; font-weight: bold; border-radius: 4px; font-size: 14px;">
+                    <span style="font-size: 18px; margin-right: 10px;">f</span> Facebook UTNFRC
+                </a>
+                <a href="#"
+                    style="display: flex; align-items: center; justify-content: start; background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: white; padding: 8px 10px; margin-bottom: 5px; font-weight: bold; border-radius: 4px; font-size: 14px;">
+                    <span style="font-size: 18px; margin-right: 10px;">📸</span> Instagram UTNFRC
+                </a>
+                <a href="#"
+                    style="display: flex; align-items: center; justify-content: start; background: #c4302b; color: white; padding: 8px 10px; margin-bottom: 5px; font-weight: bold; border-radius: 4px; font-size: 14px;">
+                    <span style="font-size: 18px; margin-right: 10px;">▶</span> Youtube UTNFRC
+                </a>
+            </div>
+
+            <div style="margin-top: 15px; text-align: center; margin-bottom: 10px;">
+                <div
+                    style="border: 1px solid #ccc; padding: 2px 5px; display: inline-block; background: white; font-family: sans-serif; font-size: 10px;">
+                    <span style="font-weight: bold; color: #555;">wifi</span> <span
+                        style="font-weight: bold; color: #00529b; font-size: 12px;">IPv6</span> <span
+                        style="color: #555;">Enabled</span>
+                </div>
+            </div>
+        </aside>
+
     </div>
 
-  </div>
+    <!-- Footer -->
+    <footer class="footer">
+        Universidad Tecnológica Nacional - Facultad Regional Córdoba <br>
+        Maestro M. Lopez esq. Cruz Roja Argentina (X5016ZAA) Ciudad Universitaria - Córdoba - Argentina<br>
+        Teléfono: +54 - (0)351 - 5986000 - Fax: +54 - (0)351 - 5986029<br>
+        <br>
+        &copy; 1998 - 2026 Cómputos - UTNFRC
+    </footer>
 
-  <!-- Scripts -->
-  <script src="Autogestión Académica 4_files/jquery.min.js.descarga"></script>
-  <script>
-    $(document).ready(function () {
+    <script>
+        function updateTime() {
+            const now = new Date();
 
-      // Update clock every second
-      function updateClock() {
-        var now = new Date();
+            // Format time: HH:mm hs.
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            const timeString = `${hours}:${minutes} hs.`;
 
-        // Time format: HH:mm hs.
-        var hours = String(now.getHours()).padStart(2, '0');
-        var minutes = String(now.getMinutes()).padStart(2, '0');
-        var timeString = hours + ':' + minutes + ' hs.';
+            // Format date: DayName, DD de MonthName de YYYY
+            const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-        // Date format: Weekday, DD de Month de YYYY
-        var days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-        var months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            const dayName = days[now.getDay()];
+            const day = now.getDate();
+            const dayFormatted = day < 10 ? '0' + day : day;
+            const monthName = months[now.getMonth()];
+            const year = now.getFullYear();
 
-        var dayName = days[now.getDay()];
-        var dayNum = now.getDate();
-        var monthName = months[now.getMonth()];
-        var year = now.getFullYear();
+            const dateString = `${dayName}, ${dayFormatted} de ${monthName} de ${year}`;
 
-        // Example: Domingo, 25 de Enero de 2026
-        var dateString = dayName + ', ' + dayNum + ' de ' + monthName + ' de ' + year;
-
-        $('#clock-time').text(timeString);
-        $('#clock-date').text(dateString);
-      }
-
-      // Init clock immediately and set interval
-      updateClock();
-      setInterval(updateClock, 1000);
-
-      $('#loginForm').on('submit', function (e) {
-        e.preventDefault();
-        var user = $('#txtUsuario').val();
-        var pass = $('#txtPassword').val();
-
-        // Updated password to bautista123
-        if (user == '90773' && pass == 'bautista123') {
-          window.location.href = 'Autogestión Académica 4.html';
-        } else {
-          alert('Usuario o contraseña incorrectos.\nIntentá con: 90773 / bautista123');
+            // Update DOM
+            const displayElement = document.getElementById('current-time-display');
+            if (displayElement) {
+                displayElement.innerHTML = `CBA | ${timeString} | ${dateString}`;
+            }
         }
-      });
-    });
-  </script>
+
+        // Update immediately and then every second
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
 </body>
 
 </html>
